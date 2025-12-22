@@ -14,6 +14,7 @@ APP = ['clicker_server.py']
 DATA_FILES = []
 OPTIONS = {
     'argv_emulation': False,
+    'iconfile': 'Clicker.icns',
     'packages': ['websockets', 'qrcode', 'PIL'],
     'includes': [
         'asyncio',

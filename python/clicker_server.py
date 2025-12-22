@@ -776,7 +776,7 @@ APP_JS = '''class ClickerApp {
         this.triggerHaptic();
     }
 
-    playClickSound() {
+    async playClickSound() {
         try {
             // Create audio context on first interaction (required by browsers)
             if (!this.audioContext) {
@@ -785,13 +785,13 @@ APP_JS = '''class ClickerApp {
 
             const ctx = this.audioContext;
 
-            // Resume if suspended (required for iOS Safari)
+            // Resume if suspended (required for iOS Safari) - must await!
             if (ctx.state === 'suspended') {
-                ctx.resume();
+                await ctx.resume();
             }
 
-        // Create a satisfying mechanical click sound
-        const clickTime = ctx.currentTime;
+            // Create a satisfying mechanical click sound
+            const clickTime = ctx.currentTime;
 
         // Main click - short noise burst
         const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.03, ctx.sampleRate);
@@ -872,7 +872,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 '''
 
-SW_JS = '''const CACHE_NAME = 'clicker-v11';
+SW_JS = '''const CACHE_NAME = 'clicker-v12';
 const ASSETS = [
     './',
     './index.html',

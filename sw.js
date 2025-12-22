@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clicker-v8';
+const CACHE_NAME = 'clicker-v9';
 const ASSETS = [
     './',
     './index.html',

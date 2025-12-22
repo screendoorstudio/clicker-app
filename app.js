@@ -123,9 +123,12 @@ class ClickerApp {
 
         // Manual connect button
         this.connectBtn.addEventListener('click', () => {
+            alert('Connect clicked! Input value: ' + this.manualUrl.value);
             const url = this.manualUrl.value.trim();
             if (url) {
                 this.connect(url);
+            } else {
+                alert('URL is empty!');
             }
         });
 

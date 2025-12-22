@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Clicker">
+    <meta name="theme-color" content="#2c1810">
+    <title>Clicker</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <img id="button-off" src="images/button-off.jpg" alt="OFF">
+        <img id="button-on" src="images/button-on.jpg" alt="ON" class="hidden">
+        <div id="rec-indicator" class="hidden">REC</div>
+    </div>
+
+    <div id="welcome-overlay" class="overlay hidden">
+        <div class="overlay-content welcome-content">
+            <h1>Option Key Remote</h1>
+            <p class="welcome-subtitle">Control your Mac's Option key from your iPhone</p>
+
+            <div class="welcome-steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <span class="step-text">Download <strong>clicker_server.py</strong> on your Mac</span>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <span class="step-text">Run: <code>python3 clicker_server.py</code></span>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <span class="step-text">Enter your Mac's IP address below</span>
+                </div>
+            </div>
+
+            <a href="https://github.com/jakewaitzman/clicker-app" target="_blank" class="github-link">
+                Download from GitHub
+            </a>
+
+            <button id="welcome-continue">I have the server running</button>
+        </div>
+    </div>
+
+    <div id="connect-overlay" class="overlay hidden">
+        <div class="overlay-content">
+            <h1>Clicker</h1>
+            <p>Connect to your computer</p>
+            <button id="scan-btn">Scan QR Code</button>
+            <div class="divider"><span>or</span></div>
+            <input id="manual-url" type="text" placeholder="Enter IP address (e.g. 192.168.1.100)">
+            <button id="connect-btn">Connect</button>
+        </div>
+    </div>
+
+    <div id="scanner-overlay" class="overlay hidden">
+        <video id="scanner-video" autoplay playsinline></video>
+        <div id="scanner-frame"></div>
+        <button id="cancel-scan">Cancel</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

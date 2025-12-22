@@ -475,6 +475,7 @@ APP_JS = '''class ClickerApp {
         // Add click handlers
         container.querySelectorAll('.history-item').forEach(btn => {
             btn.addEventListener('click', () => {
+                this.unlockAudio(); // Pre-warm audio for Chrome/Brave iOS
                 this.connect(btn.dataset.url);
             });
         });
@@ -518,6 +519,7 @@ APP_JS = '''class ClickerApp {
 
         // Manual connect button
         this.connectBtn.addEventListener('click', () => {
+            this.unlockAudio(); // Pre-warm audio for Chrome/Brave iOS
             const url = this.manualUrl.value.trim();
             if (url) {
                 this.connect(url);
@@ -692,6 +694,29 @@ APP_JS = '''class ClickerApp {
         }
     }
 
+    async unlockAudio() {
+        // Pre-warm AudioContext on user interaction to enable sound in Chrome/Brave iOS
+        // These browsers are stricter than Safari about when audio can start
+        try {
+            if (!this.audioContext) {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (this.audioContext.state === 'suspended') {
+                await this.audioContext.resume();
+            }
+
+            // Play silent buffer to fully unlock audio system
+            const buffer = this.audioContext.createBuffer(1, 1, 22050);
+            const source = this.audioContext.createBufferSource();
+            source.buffer = buffer;
+            source.connect(this.audioContext.destination);
+            source.start(0);
+        } catch (e) {
+            console.log('Audio unlock error:', e);
+        }
+    }
+
     updateUI() {
         if (this.isOn) {
             this.buttonOn.classList.remove('hidden');
@@ -717,7 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 '''
 
-SW_JS = '''const CACHE_NAME = 'clicker-v13';
+SW_JS = '''const CACHE_NAME = 'clicker-v14';
 const ASSETS = [
     './',
     './index.html',

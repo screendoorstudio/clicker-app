@@ -215,6 +215,8 @@ class ClickerApp {
     }
 
     connect(url) {
+        alert('connect() called with: ' + url);
+
         // Clean up any existing connection
         if (this.ws) {
             this.ws.onclose = null;
@@ -248,8 +250,16 @@ class ClickerApp {
             wsUrl = wsUrl + ':8765';
         }
 
+        alert('Attempting WebSocket connection to: ' + wsUrl);
         console.log('Connecting to:', wsUrl);
-        this.ws = new WebSocket(wsUrl);
+
+        try {
+            this.ws = new WebSocket(wsUrl);
+            alert('WebSocket created successfully');
+        } catch (e) {
+            alert('WebSocket error: ' + e.message);
+            return;
+        }
 
         this.ws.onopen = () => {
             console.log('Connected!');

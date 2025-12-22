@@ -717,6 +717,11 @@ APP_JS = '''class ClickerApp {
             url = 'ws://' + url;
         }
 
+        // Add default port if none specified
+        if (!url.includes(':', 5)) {
+            url = url + ':8765';
+        }
+
         console.log('Connecting to:', url);
         this.ws = new WebSocket(url);
 

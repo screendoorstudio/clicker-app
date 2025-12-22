@@ -73,6 +73,172 @@
             font-size: 14px;
         }
 
+        /* Hero Visual */
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 -24px 48px -24px;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            width: 120px;
+            height: 240px;
+            background: #333;
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 16px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: #2c1810;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-dot {
+            position: absolute;
+            top: 24px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: #44ff44;
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(68, 255, 68, 0.6);
+        }
+
+        .phone-home-bar {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: #555;
+            border-radius: 2px;
+        }
+
+        /* Arrow Connector */
+        .arrow-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .arrow-connector svg {
+            width: 80px;
+            height: 30px;
+        }
+
+        .arrow-connector span {
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Keyboard Mockup */
+        .keyboard-mockup {
+            flex-shrink: 0;
+        }
+
+        .keyboard-body {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .key-row {
+            display: flex;
+            gap: 4px;
+        }
+
+        .key {
+            background: #3a3a3a;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 11px;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+        }
+
+        .key.small {
+            min-width: 28px;
+        }
+
+        .key.medium {
+            min-width: 36px;
+        }
+
+        .key.spacebar {
+            min-width: 80px;
+        }
+
+        .key.highlight {
+            background: #cc3333;
+            border-color: #ff4444;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(204, 51, 51, 0.5);
+        }
+
+        .key-label {
+            text-align: center;
+            margin-top: 10px;
+            color: #cc3333;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 520px) {
+            .hero-visual {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .arrow-connector svg {
+                transform: rotate(90deg);
+            }
+
+            .keyboard-body {
+                transform: scale(0.9);
+            }
+        }
+
         /* How it works */
         .section {
             margin-bottom: 48px;
@@ -257,6 +423,40 @@
             <a href="/download" class="download-btn">Download for Mac</a>
             <p class="platform-note">Requires macOS 10.15 or later</p>
         </section>
+
+        <div class="hero-visual">
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <img src="pwa/app/images/button-off.jpg" alt="Clicker app button">
+                    <div class="status-dot"></div>
+                </div>
+                <div class="phone-home-bar"></div>
+            </div>
+
+            <div class="arrow-connector">
+                <svg viewBox="0 0 120 40" fill="none">
+                    <path d="M0 20 H100" stroke="#cc3333" stroke-width="3" stroke-linecap="round"/>
+                    <polygon points="95,12 115,20 95,28" fill="#cc3333"/>
+                </svg>
+                <span>controls</span>
+            </div>
+
+            <div class="keyboard-mockup">
+                <div class="keyboard-body">
+                    <div class="key-row">
+                        <span class="key small">fn</span>
+                        <span class="key small">⌃</span>
+                        <span class="key small">⌥</span>
+                        <span class="key medium">⌘</span>
+                        <span class="key spacebar"></span>
+                        <span class="key medium">⌘</span>
+                        <span class="key highlight">⌥</span>
+                    </div>
+                </div>
+                <div class="key-label">Right Option Key</div>
+            </div>
+        </div>
 
         <section class="section">
             <h2>Setup Guide</h2>

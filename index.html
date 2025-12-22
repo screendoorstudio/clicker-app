@@ -189,6 +189,32 @@
             margin: 0 12px;
         }
 
+        /* Troubleshooting */
+        .troubleshooting {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .trouble-item {
+            background: #252525;
+            padding: 16px 20px;
+            border-radius: 10px;
+        }
+
+        .trouble-item h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .trouble-item p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
         /* Requirements */
         .requirements {
             margin-top: 24px;
@@ -233,27 +259,42 @@
         </section>
 
         <section class="section">
-            <h2>How It Works</h2>
+            <h2>Setup Guide</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-num">1</div>
                     <div class="step-content">
-                        <h3>Run Clicker on your Mac</h3>
-                        <p>Download and unzip. <strong>Right-click</strong> the app and select <strong>Open</strong> (required for first launch). Grant Accessibility permission when prompted.</p>
+                        <h3>Download</h3>
+                        <p>Click <strong>Download for Mac</strong> above and unzip the file.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-num">2</div>
                     <div class="step-content">
-                        <h3>Scan the QR code</h3>
-                        <p>Point your iPhone camera at the QR code shown on your Mac. Tap the notification to open.</p>
+                        <h3>Open Clicker (first time only)</h3>
+                        <p><strong>Option A:</strong> Right-click Clicker.app and select <strong>Open</strong>, then click <strong>Open</strong> again.</p>
+                        <p style="margin-top: 8px;"><strong>Option B:</strong> Double-click the app. If macOS says it can't be opened, click <strong>Done</strong>. Then go to <strong>System Settings → Privacy & Security</strong>, scroll down, and click <strong>Open Anyway</strong>.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-num">3</div>
                     <div class="step-content">
-                        <h3>Tap to toggle</h3>
-                        <p>Tap anywhere on the screen to hold down the Option key. Tap again to release.</p>
+                        <h3>Grant Accessibility Permission</h3>
+                        <p>Go to <strong>System Settings → Privacy & Security → Accessibility</strong> and toggle <strong>Clicker</strong> ON. This allows the app to simulate the Option key.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h3>Scan the QR Code</h3>
+                        <p>Make sure your <strong>iPhone is on the same WiFi network</strong> as your Mac. Open the <strong>Camera app</strong> on your iPhone, point it at the QR code on your Mac, and tap the notification that appears.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h3>Connect and Use</h3>
+                        <p>If the app doesn't auto-connect, enter the <strong>IP address</strong> shown on your Mac and tap <strong>Connect</strong>. Tap anywhere on screen to toggle the Option key on/off.</p>
                     </div>
                 </div>
             </div>
@@ -264,9 +305,30 @@
             <p>Extended Option-key tasks, accessing hidden menu options, copying files instead of moving them, or any time you need to hold Option without touching your keyboard.</p>
         </div>
 
+        <section class="section">
+            <h2>Troubleshooting</h2>
+            <div class="troubleshooting">
+                <div class="trouble-item">
+                    <h4>Option key not working?</h4>
+                    <p>Make sure Clicker is enabled in <strong>System Settings → Privacy & Security → Accessibility</strong>. You may need to remove and re-add it if it was previously denied.</p>
+                </div>
+                <div class="trouble-item">
+                    <h4>Can't connect from iPhone?</h4>
+                    <p>Ensure both devices are on the <strong>same WiFi network</strong>. Try entering the IP address manually (shown on your Mac when Clicker is running).</p>
+                </div>
+                <div class="trouble-item">
+                    <h4>No sound when tapping?</h4>
+                    <p>Make sure your iPhone isn't on silent mode. If using Chrome or Brave, the sound should work after the latest update.</p>
+                </div>
+                <div class="trouble-item">
+                    <h4>To quit Clicker:</h4>
+                    <p>Open <strong>Activity Monitor</strong>, search for "Clicker", select it, and click the X button to stop it.</p>
+                </div>
+            </div>
+        </section>
+
         <div class="requirements">
-            <strong>Requirements:</strong> Mac running macOS 10.15+, iPhone with iOS 15+, both on the same WiFi network.<br><br>
-            <strong>To quit:</strong> Open Activity Monitor, search for "Clicker", select it, and click the X button.
+            <strong>Requirements:</strong> Mac running macOS 10.15+, iPhone with iOS 15+, both on the same WiFi network.
         </div>
 
         <footer class="footer">

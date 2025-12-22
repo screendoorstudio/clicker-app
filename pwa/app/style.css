@@ -115,11 +115,6 @@ html, body {
     opacity: 0.9;
 }
 
-#scan-btn {
-    background: #cc3333;
-    color: white;
-}
-
 #connect-btn {
     background: #444;
     color: white;
@@ -143,64 +138,6 @@ html, body {
 .overlay input:focus {
     outline: none;
     border-color: #cc3333;
-}
-
-.divider {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 8px 0;
-}
-
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #444;
-}
-
-.divider span {
-    color: #666;
-    padding: 0 16px;
-    font-size: 14px;
-}
-
-/* QR Scanner */
-#scanner-overlay {
-    background: #000;
-}
-
-#scanner-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-#scanner-frame {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-    border: 3px solid #fff;
-    border-radius: 20px;
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-}
-
-#cancel-scan {
-    position: absolute;
-    bottom: max(env(safe-area-inset-bottom), 40px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    padding: 14px 40px;
-    border-radius: 25px;
-    border: none;
-    font-size: 17px;
-    backdrop-filter: blur(10px);
 }
 
 /* REC Indicator */

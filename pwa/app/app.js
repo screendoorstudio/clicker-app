@@ -5,7 +5,6 @@ class ClickerApp {
         this.serverUrl = localStorage.getItem('clicker_server_url');
         this.hasSeenWelcome = localStorage.getItem('clicker_seen_welcome');
         this.reconnectTimeout = null;
-        this.scanStream = null;
         this.audioContext = null;
 
         // DOM elements
@@ -14,12 +13,8 @@ class ClickerApp {
         this.recIndicator = document.getElementById('rec-indicator');
         this.welcomeOverlay = document.getElementById('welcome-overlay');
         this.connectOverlay = document.getElementById('connect-overlay');
-        this.scannerOverlay = document.getElementById('scanner-overlay');
-        this.scanBtn = document.getElementById('scan-btn');
         this.connectBtn = document.getElementById('connect-btn');
         this.manualUrl = document.getElementById('manual-url');
-        this.cancelScan = document.getElementById('cancel-scan');
-        this.scannerVideo = document.getElementById('scanner-video');
         this.welcomeContinue = document.getElementById('welcome-continue');
 
         this.init();
@@ -160,7 +155,6 @@ class ClickerApp {
             if (e.target.closest('.overlay')) return;
             if (!this.welcomeOverlay.classList.contains('hidden')) return;
             if (!this.connectOverlay.classList.contains('hidden')) return;
-            if (!this.scannerOverlay.classList.contains('hidden')) return;
 
             e.preventDefault();
             touchHandled = true;
@@ -180,18 +174,11 @@ class ClickerApp {
             if (e.target.closest('.overlay')) return;
             if (!this.welcomeOverlay.classList.contains('hidden')) return;
             if (!this.connectOverlay.classList.contains('hidden')) return;
-            if (!this.scannerOverlay.classList.contains('hidden')) return;
 
             if (this.ws && this.ws.readyState === WebSocket.OPEN) {
                 this.toggle();
             }
         });
-
-        // QR Scan button
-        this.scanBtn.addEventListener('click', () => this.startScan());
-
-        // Cancel scan button
-        this.cancelScan.addEventListener('click', () => this.stopScan());
 
         // Manual connect button
         this.connectBtn.addEventListener('click', () => {
@@ -210,77 +197,6 @@ class ClickerApp {
                 }
             }
         });
-    }
-
-    async startScan() {
-        this.scannerOverlay.classList.remove('hidden');
-
-        try {
-            this.scanStream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'environment' }
-            });
-            this.scannerVideo.srcObject = this.scanStream;
-
-            // Try native BarcodeDetector first (Safari 17.2+)
-            if ('BarcodeDetector' in window) {
-                const detector = new BarcodeDetector({ formats: ['qr_code'] });
-                this.scanLoop(detector);
-            } else {
-                // Fallback: manual URL entry
-                this.stopScan();
-                alert('QR scanning not supported on this device. Please enter the URL manually.');
-            }
-        } catch (err) {
-            console.error('Camera error:', err);
-            this.stopScan();
-            alert('Could not access camera. Please enter the URL manually.');
-        }
-    }
-
-    async scanLoop(detector) {
-        if (!this.scanStream) return;
-
-        try {
-            const barcodes = await detector.detect(this.scannerVideo);
-            if (barcodes.length > 0) {
-                const data = barcodes[0].rawValue;
-                console.log('QR scanned:', data);
-
-                // Check if it's a URL with server param
-                if (data.includes('server=')) {
-                    const url = new URL(data);
-                    const serverUrl = url.searchParams.get('server');
-                    if (serverUrl) {
-                        this.stopScan();
-                        this.connect(serverUrl);
-                        return;
-                    }
-                }
-
-                // Or if it's a direct ws:// URL
-                if (data.startsWith('ws://') || data.startsWith('wss://')) {
-                    this.stopScan();
-                    this.connect(data);
-                    return;
-                }
-            }
-        } catch (err) {
-            console.error('Scan error:', err);
-        }
-
-        // Continue scanning
-        if (this.scanStream) {
-            requestAnimationFrame(() => this.scanLoop(detector));
-        }
-    }
-
-    stopScan() {
-        if (this.scanStream) {
-            this.scanStream.getTracks().forEach(track => track.stop());
-            this.scanStream = null;
-        }
-        this.scannerVideo.srcObject = null;
-        this.scannerOverlay.classList.add('hidden');
     }
 
     connect(url) {

@@ -161,17 +161,9 @@ INDEX_HTML = '''<!DOCTYPE html>
 
             <div id="connection-history"></div>
 
-            <button id="scan-btn">Scan QR Code</button>
-            <div class="divider"><span>or</span></div>
             <input id="manual-url" type="text" placeholder="Enter IP address (e.g. 192.168.1.100)">
             <button id="connect-btn">Connect</button>
         </div>
-    </div>
-
-    <div id="scanner-overlay" class="overlay hidden">
-        <video id="scanner-video" autoplay playsinline></video>
-        <div id="scanner-frame"></div>
-        <button id="cancel-scan">Cancel</button>
     </div>
 
     <script src="app.js"></script>
@@ -296,11 +288,6 @@ html, body {
     opacity: 0.9;
 }
 
-#scan-btn {
-    background: #cc3333;
-    color: white;
-}
-
 #connect-btn {
     background: #444;
     color: white;
@@ -324,64 +311,6 @@ html, body {
 .overlay input:focus {
     outline: none;
     border-color: #cc3333;
-}
-
-.divider {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 8px 0;
-}
-
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #444;
-}
-
-.divider span {
-    color: #666;
-    padding: 0 16px;
-    font-size: 14px;
-}
-
-/* QR Scanner */
-#scanner-overlay {
-    background: #000;
-}
-
-#scanner-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-#scanner-frame {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-    border: 3px solid #fff;
-    border-radius: 20px;
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-}
-
-#cancel-scan {
-    position: absolute;
-    bottom: max(env(safe-area-inset-bottom), 40px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    padding: 14px 40px;
-    border-radius: 25px;
-    border: none;
-    font-size: 17px;
-    backdrop-filter: blur(10px);
 }
 
 /* Connection History */
@@ -438,7 +367,6 @@ APP_JS = '''class ClickerApp {
         this.isOn = false;
         this.serverUrl = localStorage.getItem('clicker_server_url');
         this.reconnectTimeout = null;
-        this.scanStream = null;
         this.audioContext = null;
 
         // DOM elements
@@ -446,12 +374,8 @@ APP_JS = '''class ClickerApp {
         this.buttonOff = document.getElementById('button-off');
         this.recIndicator = document.getElementById('rec-indicator');
         this.connectOverlay = document.getElementById('connect-overlay');
-        this.scannerOverlay = document.getElementById('scanner-overlay');
-        this.scanBtn = document.getElementById('scan-btn');
         this.connectBtn = document.getElementById('connect-btn');
         this.manualUrl = document.getElementById('manual-url');
-        this.cancelScan = document.getElementById('cancel-scan');
-        this.scannerVideo = document.getElementById('scanner-video');
 
         this.init();
     }
@@ -568,7 +492,6 @@ APP_JS = '''class ClickerApp {
             // Don't trigger if touching an overlay
             if (e.target.closest('.overlay')) return;
             if (!this.connectOverlay.classList.contains('hidden')) return;
-            if (!this.scannerOverlay.classList.contains('hidden')) return;
 
             e.preventDefault();
             touchHandled = true;
@@ -587,18 +510,11 @@ APP_JS = '''class ClickerApp {
             }
             if (e.target.closest('.overlay')) return;
             if (!this.connectOverlay.classList.contains('hidden')) return;
-            if (!this.scannerOverlay.classList.contains('hidden')) return;
 
             if (this.ws && this.ws.readyState === WebSocket.OPEN) {
                 this.toggle();
             }
         });
-
-        // QR Scan button
-        this.scanBtn.addEventListener('click', () => this.startScan());
-
-        // Cancel scan button
-        this.cancelScan.addEventListener('click', () => this.stopScan());
 
         // Manual connect button
         this.connectBtn.addEventListener('click', () => {
@@ -617,77 +533,6 @@ APP_JS = '''class ClickerApp {
                 }
             }
         });
-    }
-
-    async startScan() {
-        this.scannerOverlay.classList.remove('hidden');
-
-        try {
-            this.scanStream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'environment' }
-            });
-            this.scannerVideo.srcObject = this.scanStream;
-
-            // Try native BarcodeDetector first (Safari 17.2+)
-            if ('BarcodeDetector' in window) {
-                const detector = new BarcodeDetector({ formats: ['qr_code'] });
-                this.scanLoop(detector);
-            } else {
-                // Fallback: manual URL entry
-                this.stopScan();
-                alert('QR scanning not supported on this device. Please enter the URL manually.');
-            }
-        } catch (err) {
-            console.error('Camera error:', err);
-            this.stopScan();
-            alert('Could not access camera. Please enter the URL manually.');
-        }
-    }
-
-    async scanLoop(detector) {
-        if (!this.scanStream) return;
-
-        try {
-            const barcodes = await detector.detect(this.scannerVideo);
-            if (barcodes.length > 0) {
-                const data = barcodes[0].rawValue;
-                console.log('QR scanned:', data);
-
-                // Check if it's a URL with server param
-                if (data.includes('server=')) {
-                    const url = new URL(data);
-                    const serverUrl = url.searchParams.get('server');
-                    if (serverUrl) {
-                        this.stopScan();
-                        this.connect(serverUrl);
-                        return;
-                    }
-                }
-
-                // Or if it's a direct ws:// URL
-                if (data.startsWith('ws://') || data.startsWith('wss://')) {
-                    this.stopScan();
-                    this.connect(data);
-                    return;
-                }
-            }
-        } catch (err) {
-            console.error('Scan error:', err);
-        }
-
-        // Continue scanning
-        if (this.scanStream) {
-            requestAnimationFrame(() => this.scanLoop(detector));
-        }
-    }
-
-    stopScan() {
-        if (this.scanStream) {
-            this.scanStream.getTracks().forEach(track => track.stop());
-            this.scanStream = null;
-        }
-        this.scannerVideo.srcObject = null;
-        this.scannerOverlay.classList.add('hidden');
     }
 
     connect(url) {
@@ -872,7 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 '''
 
-SW_JS = '''const CACHE_NAME = 'clicker-v12';
+SW_JS = '''const CACHE_NAME = 'clicker-v13';
 const ASSETS = [
     './',
     './index.html',

@@ -379,12 +379,18 @@ class ClickerApp {
     }
 
     playClickSound() {
-        // Create audio context on first interaction (required by browsers)
-        if (!this.audioContext) {
-            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        }
+        try {
+            // Create audio context on first interaction (required by browsers)
+            if (!this.audioContext) {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
 
-        const ctx = this.audioContext;
+            const ctx = this.audioContext;
+
+            // Resume if suspended (required for iOS Safari)
+            if (ctx.state === 'suspended') {
+                ctx.resume();
+            }
 
         // Create a satisfying mechanical click sound
         const clickTime = ctx.currentTime;
@@ -431,6 +437,9 @@ class ClickerApp {
         oscGain.connect(ctx.destination);
         osc.start(clickTime);
         osc.stop(clickTime + 0.03);
+        } catch (e) {
+            console.log('Audio error:', e);
+        }
     }
 
     triggerHaptic() {

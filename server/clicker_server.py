@@ -12,8 +12,8 @@ In --local mode, it also serves the embedded PWA (HTTP on port 8080).
 Requirements are auto-installed on first run.
 """
 
-# Vercel-hosted PWA URL (update after deployment)
-VERCEL_URL = "https://clicker-app.vercel.app"
+# Vercel-hosted PWA URL
+VERCEL_URL = "https://clicker-app-theta.vercel.app"
 
 import asyncio
 import json

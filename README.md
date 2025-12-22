@@ -29,7 +29,7 @@ When prompted, grant accessibility permission:
 
 1. Make sure your iPhone is on the **same WiFi network** as your Mac
 2. Scan the QR code shown in Terminal, or
-3. Visit [clicker-app.vercel.app](https://clicker-app.vercel.app) on Safari
+3. Visit [clicker-app-theta.vercel.app](https://clicker-app-theta.vercel.app) on Safari
 4. Enter your Mac's IP address (shown in Terminal)
 5. Tap anywhere on screen to toggle the Option key
 

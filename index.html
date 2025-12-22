@@ -2,69 +2,284 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Clicker">
-    <meta name="theme-color" content="#2c1810">
-    <title>Clicker</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="images/icon-192.png">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker - Option Key Remote for Mac</title>
+    <meta name="description" content="Control your Mac's Option key from your iPhone. Perfect for extended Option-key tasks without touching your keyboard.">
+    <link rel="icon" href="app/images/icon-192.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 32px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #cc3333;
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .download-btn:hover {
+            background: #dd4444;
+            transform: scale(1.02);
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        .platform-note {
+            margin-top: 12px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* How it works */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: #252525;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .step-num {
+            width: 36px;
+            height: 36px;
+            background: #cc3333;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            color: #999;
+            font-size: 15px;
+        }
+
+        /* Screenshot */
+        .screenshot {
+            text-align: center;
+            margin: 48px 0;
+        }
+
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .screenshot-caption {
+            margin-top: 16px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Use case */
+        .use-case {
+            background: #252525;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 48px;
+        }
+
+        .use-case h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #cc3333;
+        }
+
+        .use-case p {
+            color: #bbb;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+        .footer .links {
+            margin-top: 12px;
+        }
+
+        .footer .links a {
+            margin: 0 12px;
+        }
+
+        /* Requirements */
+        .requirements {
+            margin-top: 24px;
+            padding: 16px;
+            background: #1f1f1f;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .requirements strong {
+            color: #aaa;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .tagline {
+                font-size: 17px;
+            }
+
+            .download-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <img id="button-off" src="images/button-off.jpg" alt="OFF">
-        <img id="button-on" src="images/button-on.jpg" alt="ON" class="hidden">
-        <div id="rec-indicator" class="hidden">REC</div>
-    </div>
+    <div class="container">
+        <section class="hero">
+            <h1>Clicker</h1>
+            <p class="tagline">Control your Mac's Option key from your iPhone</p>
+            <a href="/download" class="download-btn">Download for Mac</a>
+            <p class="platform-note">Requires macOS 10.15 or later</p>
+        </section>
 
-    <div id="welcome-overlay" class="overlay hidden">
-        <div class="overlay-content welcome-content">
-            <h1>Option Key Remote</h1>
-            <p class="welcome-subtitle">Control your Mac's Option key from your iPhone</p>
-
-            <div class="welcome-steps">
+        <section class="section">
+            <h2>How It Works</h2>
+            <div class="steps">
                 <div class="step">
-                    <span class="step-num">1</span>
-                    <span class="step-text">Download <strong>clicker_server.py</strong> on your Mac</span>
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Run Clicker on your Mac</h3>
+                        <p>Download, unzip, and open the app. Grant Accessibility permission when prompted.</p>
+                    </div>
                 </div>
                 <div class="step">
-                    <span class="step-num">2</span>
-                    <span class="step-text">Run: <code>python3 clicker_server.py</code></span>
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Scan the QR code</h3>
+                        <p>Point your iPhone camera at the QR code shown on your Mac. Tap the notification to open.</p>
+                    </div>
                 </div>
                 <div class="step">
-                    <span class="step-num">3</span>
-                    <span class="step-text">Enter your Mac's IP address below</span>
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Tap to toggle</h3>
+                        <p>Tap anywhere on the screen to hold down the Option key. Tap again to release.</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <a href="https://github.com/screendoorstudio/clicker-app" target="_blank" class="github-link">
-                Download from GitHub
-            </a>
-
-            <button id="welcome-continue">I have the server running</button>
+        <div class="screenshot">
+            <img src="assets/screenshot.svg" alt="Clicker QR code window on Mac">
+            <p class="screenshot-caption">Scan the QR code with your iPhone camera</p>
         </div>
-    </div>
 
-    <div id="connect-overlay" class="overlay hidden">
-        <div class="overlay-content">
-            <h1>Clicker</h1>
-            <p>Connect to your computer</p>
-            <button id="scan-btn">Scan QR Code</button>
-            <div class="divider"><span>or</span></div>
-            <input id="manual-url" type="text" placeholder="Enter IP address (e.g. 192.168.1.100)">
-            <button id="connect-btn">Connect</button>
+        <div class="use-case">
+            <h3>Perfect for:</h3>
+            <p>Extended Option-key tasks, accessing hidden menu options, copying files instead of moving them, or any time you need to hold Option without touching your keyboard.</p>
         </div>
-    </div>
 
-    <div id="scanner-overlay" class="overlay hidden">
-        <video id="scanner-video" autoplay playsinline></video>
-        <div id="scanner-frame"></div>
-        <button id="cancel-scan">Cancel</button>
-    </div>
+        <div class="requirements">
+            <strong>Requirements:</strong> Mac running macOS 10.15+, iPhone with iOS 15+, both on the same WiFi network.
+        </div>
 
-    <script src="app.js"></script>
+        <footer class="footer">
+            <p>Made by Screen Door Studio</p>
+            <div class="links">
+                <a href="https://github.com/screendoorstudio/clicker-app">GitHub</a>
+                <a href="https://github.com/screendoorstudio/clicker-app/issues">Report Issue</a>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

@@ -1,0 +1,16 @@
+# Build artifacts
+python/build/
+python/dist/
+*.pyc
+__pycache__/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Local files
+working_python_file_to_share/
+bug-help/

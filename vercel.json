@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/app/(.*)",
+      "destination": "/pwa/app/$1"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/download",
+      "destination": "https://github.com/screendoorstudio/clicker-app/releases/latest/download/Clicker.app.zip",
+      "permanent": false
+    }
+  ]
+}

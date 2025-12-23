@@ -222,6 +222,10 @@ Just push to main - Vercel auto-deploys from GitHub
    - Blurred QR code with "QR Code" label overlay
    - Masked IP address with "XX.X.X.XXX" placeholder
 
+4. Expanded keyboard mockup in hero visual
+   - Full 5-row Mac keyboard layout
+   - Right Option key highlighted with red glow animation
+
 **New files:** `website-steps/` folder with 5 setup screenshots
 
 ---

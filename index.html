@@ -231,31 +231,36 @@
 
         .key-row {
             display: flex;
-            gap: 5px;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .key-row:last-child {
+            margin-bottom: 0;
         }
 
         .key {
             background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
             border: 1px solid #444;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 12px;
+            border-radius: 4px;
+            padding: 6px 4px;
+            font-size: 10px;
             color: #aaa;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 32px;
-            height: 32px;
+            min-width: 26px;
+            height: 26px;
             font-weight: 500;
         }
 
-        .key.spacebar {
-            min-width: 90px;
-        }
-
-        .key.medium {
-            min-width: 40px;
-        }
+        .key.w15 { min-width: 38px; }
+        .key.w175 { min-width: 44px; }
+        .key.w2 { min-width: 52px; }
+        .key.w225 { min-width: 58px; }
+        .key.w275 { min-width: 70px; }
+        .key.spacebar { min-width: 140px; }
+        .key.medium { min-width: 34px; }
 
         .key.highlight {
             background: linear-gradient(180deg, var(--accent) 0%, #c41d2e 100%);
@@ -696,13 +701,77 @@
                 <div class="keyboard-mockup">
                     <div class="keyboard-body">
                         <div class="key-row">
+                            <span class="key">`</span>
+                            <span class="key">1</span>
+                            <span class="key">2</span>
+                            <span class="key">3</span>
+                            <span class="key">4</span>
+                            <span class="key">5</span>
+                            <span class="key">6</span>
+                            <span class="key">7</span>
+                            <span class="key">8</span>
+                            <span class="key">9</span>
+                            <span class="key">0</span>
+                            <span class="key">-</span>
+                            <span class="key">=</span>
+                            <span class="key w15">⌫</span>
+                        </div>
+                        <div class="key-row">
+                            <span class="key w15">⇥</span>
+                            <span class="key">Q</span>
+                            <span class="key">W</span>
+                            <span class="key">E</span>
+                            <span class="key">R</span>
+                            <span class="key">T</span>
+                            <span class="key">Y</span>
+                            <span class="key">U</span>
+                            <span class="key">I</span>
+                            <span class="key">O</span>
+                            <span class="key">P</span>
+                            <span class="key">[</span>
+                            <span class="key">]</span>
+                            <span class="key">\</span>
+                        </div>
+                        <div class="key-row">
+                            <span class="key w175">⇪</span>
+                            <span class="key">A</span>
+                            <span class="key">S</span>
+                            <span class="key">D</span>
+                            <span class="key">F</span>
+                            <span class="key">G</span>
+                            <span class="key">H</span>
+                            <span class="key">J</span>
+                            <span class="key">K</span>
+                            <span class="key">L</span>
+                            <span class="key">;</span>
+                            <span class="key">'</span>
+                            <span class="key w175">⏎</span>
+                        </div>
+                        <div class="key-row">
+                            <span class="key w225">⇧</span>
+                            <span class="key">Z</span>
+                            <span class="key">X</span>
+                            <span class="key">C</span>
+                            <span class="key">V</span>
+                            <span class="key">B</span>
+                            <span class="key">N</span>
+                            <span class="key">M</span>
+                            <span class="key">,</span>
+                            <span class="key">.</span>
+                            <span class="key">/</span>
+                            <span class="key w275">⇧</span>
+                        </div>
+                        <div class="key-row">
                             <span class="key">fn</span>
                             <span class="key">⌃</span>
                             <span class="key">⌥</span>
-                            <span class="key medium">⌘</span>
+                            <span class="key w15">⌘</span>
                             <span class="key spacebar"></span>
-                            <span class="key medium">⌘</span>
+                            <span class="key w15">⌘</span>
                             <span class="key highlight">⌥</span>
+                            <span class="key">←</span>
+                            <span class="key">↑↓</span>
+                            <span class="key">→</span>
                         </div>
                     </div>
                     <div class="key-label">Right Option Key</div>

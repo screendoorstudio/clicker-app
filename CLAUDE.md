@@ -105,6 +105,12 @@ The Clicker app/
 │       ├── Clicker.app           # Built Mac application
 │       └── Clicker.app.zip       # Zipped for GitHub Release
 ├── UI images/                    # Original button artwork (high-res)
+├── website-steps/                # Setup screenshots for landing page
+│   ├── STEP_01_Download zip file.png
+│   ├── STEP_02_ unzip to open Clicker app.png
+│   ├── STEP_03_enable the Clicker App here.png
+│   ├── STEP_04_what you see after you install the app.png
+│   └── Quit_Clicker-App_in-Activity-Monitor.png
 └── working_python_file_to_share/ # Legacy - use GitHub Release instead
 ```
 
@@ -192,6 +198,33 @@ Just push to main - Vercel auto-deploys from GitHub
 ---
 
 ## Session Log
+
+### 2025-12-22 Evening Session
+**Goal:** Redesign landing page with better aesthetics and integrate setup screenshots
+
+**What we accomplished:**
+1. Complete landing page redesign
+   - Modern dark theme with subtle red accent glow
+   - Inter font for cleaner typography
+   - Gradient title text and radial gradient overlay
+   - Animated elements (pulsing connection dot, glowing Option key)
+   - Refined card styling with hover effects
+   - Download button with icon
+
+2. Integrated setup screenshots into steps
+   - Step 1: Side-by-side images of zip file and unzipped app
+   - Step 3: Accessibility settings showing Clicker enabled
+   - Step 4: QR code server window inside monitor mockup frame
+   - Troubleshooting: Activity Monitor screenshot for "How to quit"
+
+3. Privacy improvements for Step 4 screenshot
+   - Added monitor frame around the image
+   - Blurred QR code with "QR Code" label overlay
+   - Masked IP address with "XX.X.X.XXX" placeholder
+
+**New files:** `website-steps/` folder with 5 setup screenshots
+
+---
 
 ### 2025-12-22 Afternoon Session
 **Goal:** Polish the app for sharing with friends

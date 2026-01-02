@@ -26,7 +26,7 @@ The Clicker App is a remote toggle control that lets you hold down the **right O
 
 ---
 
-## Current Status (as of 2025-12-22)
+## Current Status (as of 2026-01-02)
 
 ### What's Live
 - **Landing Page:** https://clicker-app-theta.vercel.app
@@ -198,6 +198,11 @@ Just push to main - Vercel auto-deploys from GitHub
 ---
 
 ## Session Log
+
+### 2026-01-02 Quick Update
+- Added link to https://screendoorstudio.com/ in landing page footer
+
+---
 
 ### 2025-12-22 Evening Session
 **Goal:** Redesign landing page with better aesthetics and integrate setup screenshots
